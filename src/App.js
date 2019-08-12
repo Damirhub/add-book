@@ -13,14 +13,15 @@ const ExampleRoute2 = props => {
 const App = () => {
   return (
     <>
-      <Router history={createBrowserHistory()}>
+      {/* <Router history={createBrowserHistory()}>
         <Header />
         <Switch>
           <Route exact path="/" component={Mockup} />
           <Route exact path="/test" component={ExampleRoute} />
           <Route exact path="/test/:id" component={ExampleRoute2} />
         </Switch>
-      </Router>
+      </Router> */}
+      <Mockup />
     </>
   );
 };

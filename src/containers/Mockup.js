@@ -88,7 +88,6 @@ const Mockup = ({
             <h3>{input_text}</h3>
             <hr />
             {stateprop2}
-            {selectedGenre}
         </>
     );
 };

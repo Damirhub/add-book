@@ -34,9 +34,9 @@ const store = createStore(
 const app = (
     <div className="App">
         <Provider store={store}>
-            <BrowserRouter>
+            {/* <BrowserRouter> */}
                 <App />
-            </BrowserRouter>
+            {/* </BrowserRouter> */}
         </Provider>
     </div>
 );
