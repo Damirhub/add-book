@@ -6,7 +6,8 @@ console.log("XXX", initial)
 
 const initialState = {
     stateprop1: false,
-    user_input: ""
+    user_input: "",
+    selectedGenre: ''
 };
 
 const reducer1 = (state = initialState, action) => {
@@ -22,11 +23,19 @@ const reducer1 = (state = initialState, action) => {
                 stateprop1: false
             };
         case ACTION_TYPES.USER_INPUT:
-          console.log("ACTION: ", action);
-          return {
-            ...state,
-            user_input: action.text
-          };
+            console.log("ACTION: ", action);
+            return {
+                ...state,
+                user_input: action.text
+            };
+
+            case ACTION_TYPES.SELECT_GENRE:
+            console.log("SELECTED GENRE: ", action);
+            return {
+                ...state,
+                selectedGenre: action.payload
+            };
+
         default:
             return state;
     }

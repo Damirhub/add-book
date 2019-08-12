@@ -1,5 +1,15 @@
 import * as ACTION_TYPES from "./action_types";
 
+
+
+export const selectGenre = (payload) => {
+    return {
+        type: ACTION_TYPES.SELECT_GENRE,
+        payload
+    };
+};
+
+
 // ACTION CREATOR FUNCTIONS
 export const success = () => {
     return {

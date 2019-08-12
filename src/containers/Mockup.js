@@ -14,32 +14,43 @@ const Mockup = ({
     action_creator2,
     user_input,
     input_text,
-    ...restOfProps
+
+    selectGenre,
+    selectedGenre
 }) => {
 
 
     const [genre, setGenre] = useState('')
 
-    const handleClick = (G) => {
-        console.log("GGGG", G)
-    }
 
-    console.log("ZZZ", genre)
+    console.log("GENRE", genre)
+    console.log("GENRE SUB", genre.subgenres)
     // console.log( init.genres.map((x, y) => { x[y] })   )
+    console.log("SELECTED from reducer", selectedGenre)
+    console.log("SELECTED from reducer SUB", selectedGenre.subgenres)
+
+
+    console.log("SELECTED from GENRE MAP", genre && genre.subgenres.map(x => x.name))
+    console.log("SELECTED from reducer MAP", selectedGenre && selectedGenre.subgenres.map(x => x.name))
     return (
         <>
-            {/* {init.genres.map(x => {
-                return (
-                    <button onClick={handleClick(x.name)} key={x.id} >
-                        {x.name} </button>)
-            })} */}
+
 
             {init.genres.map(x => {
                 return (
-                    <button onClick={() => handleClick(x)} key={x.id} >
+                    <button onClick={() => selectGenre(x)} key={x.id} >
                         {x.name}
                     </button>)
             })}
+
+            {selectedGenre && selectedGenre.subgenres.map(z => {
+                return (
+                    <button key={z.id} >
+                        {[z.name]}
+                    </button>)
+            })}
+
+
 
             {init.genres.map(x => {
                 return (
@@ -47,7 +58,13 @@ const Mockup = ({
                         {x.name}
                     </button>)
             })}
-
+            <hr />
+            {genre && genre.subgenres.map(z => {
+                return (
+                    <button key={z.id} >
+                        {z.name}
+                    </button>)
+            })}
 
 
 
@@ -71,6 +88,7 @@ const Mockup = ({
             <h3>{input_text}</h3>
             <hr />
             {stateprop2}
+            {selectedGenre}
         </>
     );
 };
@@ -79,8 +97,10 @@ const mapStateToProps = state => {
     return {
         stateprop1: state.example.stateprop1,
         stateprop2: state.example2.stateprop2,
+        input_text: state.example2.user_input,
 
-        input_text: state.example2.user_input
+        selectedGenre: state.example.selectedGenre
+
     };
 };
 
@@ -92,7 +112,9 @@ const mapDispatchToProps = dispatch => {
         action_creator1: () => dispatch(ACTIONS.success()),
         action_creator2: () => dispatch(failure()),
 
-        user_input: whatever => dispatch(ACTIONS.user_input(whatever))
+        user_input: whatever => dispatch(ACTIONS.user_input(whatever)),
+
+        selectGenre: (genre) => dispatch(ACTIONS.selectGenre(genre))
     };
 };
 
