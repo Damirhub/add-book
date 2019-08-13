@@ -3,6 +3,7 @@ import Mockup from "./containers/Mockup";
 import { Router, Route, Switch, Redirect } from "react-router";
 import { createBrowserHistory } from "history";
 import Header from "./containers/Header";
+import SelectGenres from "./components/SelectGenres";
 
 const ExampleRoute = () => <h2>ExampleRoute</h2>;
 const ExampleRoute2 = props => {
@@ -21,7 +22,8 @@ const App = () => {
           <Route exact path="/test/:id" component={ExampleRoute2} />
         </Switch>
       </Router> */}
-      <Mockup />
+      <SelectGenres />
+      {/* <Mockup /> */}
     </>
   );
 };

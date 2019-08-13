@@ -23,14 +23,6 @@ export const failure = () => {
     };
 };
 
-// OBJECT VERSION LESS LIKELY TO BE USED
-export const SUCCESS = {
-    type: ACTION_TYPES.SUCCESS
-};
-
-export const FAILURE = {
-    type: ACTION_TYPES.FAILURE
-};
 
 export const user_input = text => {
     return {

@@ -2,7 +2,7 @@ import * as ACTION_TYPES from "../actions/action_types";
 
 import initial from '../../config.json'
 
-console.log("XXX", initial)
+console.log("%cCONFIG INITIAL", "color:lawngreen", initial)
 
 const initialState = {
     stateprop1: false,
@@ -22,15 +22,9 @@ const reducer1 = (state = initialState, action) => {
                 ...state,
                 stateprop1: false
             };
-        case ACTION_TYPES.USER_INPUT:
-            console.log("ACTION: ", action);
-            return {
-                ...state,
-                user_input: action.text
-            };
 
             case ACTION_TYPES.SELECT_GENRE:
-            console.log("SELECTED GENRE: ", action);
+            console.log("ACTION: SELECTED GENRE: ", action);
             return {
                 ...state,
                 selectedGenre: action.payload
