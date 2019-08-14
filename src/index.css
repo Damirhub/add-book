@@ -5,16 +5,29 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #344;
+  background: #344 !important;
 }
 
 /* app styles */
 .App {
-  max-width: 400px;
+  max-width: 500px;
   margin: 30px auto;
   text-align: center;
 }
 
-.button-color {
-  color: red
+/* Override default checkbox */
+.custom-control-label::before {
+  background-color: white !important;
+  border-color: #344 !important;
+}
+
+.custom-checkbox .custom-control-label::after {
+  border-right: 2px solid #5a6169 !important;
+  border-bottom: 2px solid#5a6169 !important;
+}
+
+.buttons { 
+  margin: 8px;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
 }

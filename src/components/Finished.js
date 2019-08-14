@@ -1,11 +1,13 @@
 import React from 'react'
+import { Button } from 'shards-react'
+import Wrapper from '../containers/UI/Wrapper';
 
 const Finished = ({ pageCount, setPageCount }) => {
     return (
-        <div>
+        <Wrapper>
             <h1> BOOK IS ADDED </h1>
-            <button onClick={() => setPageCount(pageCount + 1)}> Add another book </button>
-        </div>
+            <Button theme="secondary"  onClick={() => setPageCount(pageCount + 1)}> Add another book </Button>
+        </Wrapper>
     )
 }
 

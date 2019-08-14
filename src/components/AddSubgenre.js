@@ -1,21 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button } from 'shards-react'
+import { FormCheckbox } from 'shards-react'
+import Wrapper from '../containers/UI/Wrapper';
 
 const AddSubgenre = ({ pageCount, setPageCount }) => {
+
+
+    const [state, setState] = useState({ checked: false })
+
+    const handleToggle = () => {
+        setState(prevState => ({ ...prevState, checked: !prevState.checked }));
+    };
+
     return (
-        <div>
+        <Wrapper>
             <label> some label </label>
             <br />
             <input type="text" placeholder="Subgenre name" />
             <br />
-            <input type="checkbox" value={true} />
-            <label>Description is required for this subgenre</label>
+
             <br />
 
-            <button onClick={() => setPageCount(pageCount - 1)}> BACK </button>
+            <FormCheckbox
+                className = "checkboxX"
+                checked={state.checked}
+                onChange={() => handleToggle()}
+            >
 
-            <button onClick={() => setPageCount(pageCount + 1)}> NEXT </button>
+                Description is required for this subgenre
+            </FormCheckbox>
 
-        </div>
+
+            <Button outline theme="secondary" onClick={() => setPageCount(pageCount - 1)}> BACK </Button>
+
+            <Button theme="secondary" onClick={() => setPageCount(pageCount + 1)}> NEXT </Button>
+
+        </Wrapper>
     )
 }
 

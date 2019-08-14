@@ -1,4 +1,7 @@
 import React from 'react'
+import { Button } from "shards-react"
+import Wrapper from '../containers/UI/Wrapper';
+
 
 const SelectSubgenre = ({
     addSub,
@@ -11,26 +14,26 @@ const SelectSubgenre = ({
 }) => {
     console.log('SELECTED SUBGENRE', rx.selectedSubgenre)
     return (
-        <div>
+        <Wrapper>
             {rx.selectedGenre && rx.selectedGenre.subgenres.map(z => {
                 return (
-                    <button className={(!addSub && selectedBtn) === z.name ? "button-color" : ''}
+                    <Button outline theme="secondary" active={(!addSub && selectedBtn) === z.name}
                         onClick={() => { rx.selectSubgenre(z); setAddSub(false); setSelectedBtn(z.name) }} key={z.id} >
                         {[z.name]}
-                    </button>)
+                    </Button>)
             })
             }
-            
-            <button onClick={() => setAddSub(true)} className={addSub ? "button-color" : ''}>Add Subgenre</button>
-            <hr />
-            <button onClick={() => setPageCount(pageCount - 1)}>BACK</button>
 
-            <button onClick={addSub ? () => setPageCount(pageCount + 1) : () => setPageCount(pageCount + 2)}> NEXT </button>
+            <Button outline theme="secondary" onClick={() => setAddSub(true)} active={addSub}> Add Subgenre </Button>
+            <hr />
+            <Button outline theme="secondary" onClick={() => setPageCount(pageCount - 1)}> BACK </Button>
+
+            <Button theme="secondary" onClick={addSub ? () => setPageCount(pageCount + 1) : () => setPageCount(pageCount + 2)}> NEXT </Button>
 
             <hr />
             {JSON.stringify(rx.selectedSubgenre)}
 
-        </div>
+        </Wrapper>
     )
 }
 

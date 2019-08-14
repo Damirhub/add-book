@@ -4,6 +4,9 @@ import { Router, Route, Switch, Redirect } from "react-router"
 import { createBrowserHistory } from "history"
 import Header from "./containers/Header"
 import Steps from "./containers/Steps"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "shards-ui/dist/css/shards.min.css"
+
 
 const ExampleRoute = () => <h2>ExampleRoute</h2>
 const ExampleRoute2 = props => {

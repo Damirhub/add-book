@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from "shards-react"
+import Wrapper from '../containers/UI/Wrapper';
 
 const SelectGenre = ({
     init,
@@ -10,21 +12,21 @@ const SelectGenre = ({
     selectedGenre,
 }) => {
     return (
-        <div>
+        <Wrapper>
             {init.genres.map(x => {
                 return (
-                    <button className={selectedBtn === x.name ? "button-color" : ''}
+                    <Button className = "buttons" outline theme = "secondary" active = {selectedBtn === x.name}
                         onClick={() => { selectGenre(x); setSelectedBtn(x.name) }} key={x.id} >
                         {x.name}
-                    </button>)
+                    </Button>)
             })
             }
             <br />
 
-            <button onClick={() => { setPageCount(pageCount + 1) }} disabled={!selectedBtn}> NEXT </button>
+            <Button  theme = "secondary" onClick={() => { setPageCount(pageCount + 1) }} disabled={!selectedBtn}> NEXT </Button>
             <hr />
             {JSON.stringify(selectedGenre)}
-        </div>
+        </Wrapper>
     )
 }
 
