@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import * as ACTIONS from "../store/actions/actions";
-import { failure } from "../store/actions/actions";
+import React, { useState } from "react"
+import * as ACTIONS from "../store/actions/actions"
+import { failure } from "../store/actions/actions"
 
-import { connect } from "react-redux";
+import { connect } from "react-redux"
 import init from '../config'
 
 const Mockup = ({
@@ -55,7 +55,7 @@ const Mockup = ({
             <form>
                 <input
                     onChange={e => {
-                        user_input(e.target.value);
+                        user_input(e.target.value)
                     }}
                     placeholder="user input"
                 />
@@ -65,8 +65,8 @@ const Mockup = ({
             <hr />
             {stateprop2}
         </>
-    );
-};
+    )
+}
 
 const mapStateToProps = state => {
     return {
@@ -76,8 +76,8 @@ const mapStateToProps = state => {
 
         selectedGenre: state.example.selectedGenre
 
-    };
-};
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -88,10 +88,10 @@ const mapDispatchToProps = dispatch => {
         user_input: whatever => dispatch(ACTIONS.user_input(whatever)),
 
         selectGenre: (genre) => dispatch(ACTIONS.selectGenre(genre))
-    };
-};
+    }
+}
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Mockup);
+)(Mockup)

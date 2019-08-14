@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 const Header = () => {
-    const [routesList] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
+    const [routesList] = useState([{ id: 1 }, { id: 2 }, { id: 3 }])
     return (
         <ul>
             <Link to="/" style={{ padding: "5px" }}>
@@ -21,7 +21,7 @@ const Header = () => {
                 </Link>
             ))}
         </ul>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

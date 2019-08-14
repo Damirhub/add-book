@@ -1,15 +1,15 @@
-import React from "react";
-import Mockup from "./containers/Mockup";
-import { Router, Route, Switch, Redirect } from "react-router";
-import { createBrowserHistory } from "history";
-import Header from "./containers/Header";
-import SelectGenres from "./components/SelectGenres";
+import React from "react"
+import Mockup from "./containers/Mockup"
+import { Router, Route, Switch, Redirect } from "react-router"
+import { createBrowserHistory } from "history"
+import Header from "./containers/Header"
+import Steps from "./containers/Steps"
 
-const ExampleRoute = () => <h2>ExampleRoute</h2>;
+const ExampleRoute = () => <h2>ExampleRoute</h2>
 const ExampleRoute2 = props => {
-  console.log("ROUTER PROPS: ", props);
-  return <h2>ExampleRoute2 {props.match.params.id}</h2>;
-};
+  console.log("ROUTER PROPS: ", props)
+  return <h2>ExampleRoute2 {props.match.params.id}</h2>
+}
 
 const App = () => {
   return (
@@ -22,10 +22,10 @@ const App = () => {
           <Route exact path="/test/:id" component={ExampleRoute2} />
         </Switch>
       </Router> */}
-      <SelectGenres />
+      <Steps />
       {/* <Mockup /> */}
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
