@@ -78,7 +78,7 @@ const Steps = ({
             }
 
             {/* STEP 4 */}
-            {(pageCount === 4) &&
+            {(pageCount === 1) &&
                 <Information pageCount={pageCount} setPageCount={setPageCount} addSub={addSub} />
             }
 

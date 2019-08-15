@@ -1,12 +1,10 @@
 /* Override default checkbox */
 .wrapper {
-	width: 100%;
-	max-width: 630px;
 	text-align: center;
 	background: #fefefe;
-	padding: 30px 50px;
+	padding: 30px 20px;
 	border-radius: 5px;
 	margin-bottom: 60px;
-	margin: 70px auto 60px;
 	border: 1px solid #5a6169;
 }
+

@@ -13,6 +13,7 @@ const SelectGenre = ({
 }) => {
     return (
         <Wrapper>
+             <div className="buttons-container">
             {init.genres.map(x => {
                 return (
                     <Button className = "buttons" outline theme = "secondary" active = {selectedBtn === x.name}
@@ -21,6 +22,7 @@ const SelectGenre = ({
                     </Button>)
             })
             }
+             </div>
             <br />
 
             <Button  theme = "secondary" onClick={() => { setPageCount(pageCount + 1) }} disabled={!selectedBtn}> NEXT </Button>
