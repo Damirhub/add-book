@@ -1,54 +1,79 @@
 import React, { useState } from 'react'
+import uuid from 'uuid/v1'
 import { Button, Form, FormGroup, FormInput, FormSelect } from 'shards-react'
+import DatePicker from 'react-datepicker'
 import Wrapper from '../containers/UI/Wrapper';
+
+
+const SelectIt = ({ received, id, change, heading }) => {
+    return (
+        <FormSelect onChange={change} id={id} >
+            <option disabled selected value="">{heading}</option>
+            {
+                received.map(x => <option key={uuid()} value={Object.keys(x)}>{Object.values(x)} </option>)
+            }
+        </FormSelect>
+    )
+}
+
+// {values.title === '' && true}
+
+const TextIn = ({ change, id, invalid, placeholder }) => {
+    return (
+        <FormInput onChange={change} id={id} invalid={invalid} placeholder={placeholder} className="mb-2" />
+    )
+}
+
 
 const Information = ({ pageCount, setPageCount, addSub }) => {
 
-    const [value, setValue] = useState(false)
 
     const [values, setValues] = useState({
         title: false,
         author: '',
         isbn: false,
         publisher: '',
-        number: '',
+        number: false,
         format: '',
-
+        edition: '',
+        language: ''
     })
 
-    const [authors] = useState([
-          { first :  "This is the first Author."},
-          { second : "This is the second Author."},
-          { third :  "This is the third Author."},
-    ])
+    const [options] = useState({
+        authors: [
+            { first: "This is the first Author." },
+            { second: "This is the second Author." },
+            { third: "This is the third Author." },
+        ],
+        publishers: [
+            { first: "This is the first Publisher " },
+            { second: "This is the second Publisher." },
+            { third: "This is the third Publisher." }
+        ],
+        formats: [
+            { one: "First Format. " },
+            { two: "Second Format. " },
+            { three: "Third Format. " },
+            { four: "Fourth Format. " }
+        ],
+        languages: [
+            { english: "English " },
+            { german: "German " },
+            { portugese: "Portugese " },
+            { italian: "Italian " },
+            { russian: "Russian " },
+            { japan: "Japan " }
+        ]
+    })
 
-    const [publishers] = useState([
-            { first : "This is the first Publisher "},
-            { second : "This is the second Publisher."},
-            { third : "This is the third Publisher."}
-  ])
-  const [formats] = useState([
-            { first :"First Format. "},
-            { second :"Second Format. "},
-            { third : "Third Format. "},
-            { fourth : "Fourth Format. "}
-  ])
 
-  const [languages] = useState([
-    { first :"English "},
-    { second :"German "},
-    { third : "Portugese "},
-    { fourth : "Italian "},
-    { fifth : "Russian "}
-])
-
-    
     const [id, setId] = useState('')
+    const [startDate, setStartDate] = useState(Date.now());
 
-    console.log("VALUES STATES", values.title, values.author, values.isbn, values.publisher, values.number, values.format, )
+    // const [touched, setTouched] = useState('')
 
-    const bla = Object.entries(values)
-    console.log('BLA', bla);
+    console.log("%cVALUES STATES TABLE", "color : aqua")
+    console.table(values);
 
 
     const handleChange = (e) => {
@@ -57,18 +82,30 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
         setValues({
             ...values, [id]: value
         })
-        setId({
-            id: id
-        })
+        // setId({
+        //     id: id
+        // })
+        // setTouched({touched: true})
     }
 
-    console.log(id)
 
-    const notRequired = false
+    console.log("TEXT ID IS : ", id)
+
+    // const sid = Object.values(id) 
+
+    // const required =  values[ `${sid}`] === ''
 
     const change = (e) => handleChange(e)
-    const optionValue = "ratatatira"
+    const notRequired = false
 
+
+    const changeDate = (time) => {
+        setStartDate(time)
+        try { console.log(time) }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
     return (
         <Wrapper>
             <h1> INFORMATION </h1>
@@ -76,24 +113,29 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
 
             <Form>
                 <FormGroup>
+
+
+                    <DatePicker
+                        // selected={startDate}
+                        value="DD/MM/YY"
+                        onChange={changeDate}
+                    />
+
                     <label>Book Title</label>
-                    <FormInput onChange={change} id="title" invalid={values.title === '' && true} placeholder="Book Title" className="mb-2" />
+                    {/* <FormInput onChange={change} id="title" invalid={values.title === ''} placeholder="Book Title" className="mb-2" /> */}
+
+                    <TextIn change={change} id="title" invalid={values.title === ''} placeholder="Book Title" />
 
                     <label>Author</label>
 
-                    <FormSelect  onChange={change} id="author" >
-                    <option disabled selected defaultValue="">Author</option>
-                        {authors.map( author => <option value={ Object.keys(author)}>{Object.values(author)} </option>) }
-                    </FormSelect>
+                    <SelectIt id="author" heading="Author" received={options.authors} change={change} />
 
                     <label>ISBN</label>
-                    <FormInput onChange={change} id="isbn" invalid={notRequired} placeholder="ISBN" className="mb-2" />
+                    <FormInput onChange={change} id="isbn" invalid={values.isbn === ''} placeholder="ISBN" className="mb-2" />
 
                     <label>Publisher</label>
-                    <FormSelect onChange={change} id="publisher" >
-                        <option disabled selected value="">Publisher</option>
-                        {publishers.map( publisher => <option value={ Object.keys(publisher)}>{Object.values(publisher)} </option>) }
-                    </FormSelect>
+
+                    <SelectIt id="publisher" heading="Publishers" received={options.publishers} change={change} />
 
                     <h3> INSERT DATEPICKER HERE </h3>
 
@@ -101,30 +143,34 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
                         TODO: insert datepicker
                     */}
                     <label>Number of pages</label>
-                    <FormInput type = "number" onChange={change} id="three" invalid={values.three === '' && true} placeholder="Number of pages" className="mb-2 number-input" />
+                    <FormInput type="number" onChange={change} id="number" min="1" max="4999" invalid={values.number === ''} placeholder="Number of pages" className="mb-2 number-input" />
+
+                    {/* 
+                        TODO: number of pages cut on validation
+                    */}
 
                     <label>Format</label>
-                    <FormSelect onChange={change} id="format" className="small-input">
-                        <option disabled selected value="">Format</option>
-                        {formats.map( format => <option value={ Object.keys(format)}>{Object.values(format)} </option>) }
-                    </FormSelect>
+                    <SelectIt id="format" heading="formats" received={options.formats} change={change} />
 
-                    <div className = "small-input-container" >
+                    <div className="small-input-container" >
 
-                        <div className = "small-input-editions">
+                        <div className="small-input-editions">
                             <label>Edition</label>
-                            <FormInput onChange={change} invalid={notRequired} placeholder="Edition" className="mb-2" />
+                            <FormInput id="edition" onChange={change} invalid={notRequired} placeholder="Edition" className="mb-2" />
                         </div>
 
-                        <div className = "small-input-editions">
+                        <div className="small-input-editions">
 
                             <label>Edition language</label>
+                            <SelectIt id="language" heading="Edition language" received={options.languages} change={change} />
 
-                            <FormSelect onChange={change} id="format">
-                            <option disabled selected value="">Format</option>
-                            {languages.map( language => <option value={ Object.keys(language)}>{Object.values(language)} </option>) }
-                        </FormSelect>
                         </div>
+
+                        {/* 
+                        TODO: insert description textbox
+                        */}
+
+
                     </div>
                 </FormGroup>
             </Form>
