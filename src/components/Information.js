@@ -42,6 +42,7 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
 
     // console.log(values.[dec])
     const notRequired = false
+    const required = values.three  === '' && true
 
     const change = (e) => handleChange(e)
 
