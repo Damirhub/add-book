@@ -1,43 +1,29 @@
 import React, { useState } from 'react'
-import uuid from 'uuid/v1'
-import { Button, Form, FormGroup, FormInput, FormSelect } from 'shards-react'
-import DatePicker from 'react-datepicker'
+import { Button, Form, FormGroup, FormInput } from 'shards-react'
 import Wrapper from '../containers/UI/Wrapper';
+import SelectIt from '../containers/UI/Select';
+import { DatePicker, Input } from 'antd';
 
 
-const SelectIt = ({ received, id, change, heading }) => {
-    return (
-        <FormSelect onChange={change} id={id} >
-            <option disabled selected value="">{heading}</option>
-            {
-                received.map(x => <option key={uuid()} value={Object.keys(x)}>{Object.values(x)} </option>)
-            }
-        </FormSelect>
-    )
-}
-
-// {values.title === '' && true}
-
-const TextIn = ({ change, id, invalid, placeholder }) => {
-    return (
-        <FormInput onChange={change} id={id} invalid={invalid} placeholder={placeholder} className="mb-2" />
-    )
-}
-
-
-const Information = ({ pageCount, setPageCount, addSub }) => {
+const Information = ({ pageCount, setPageCount, addSub, isChecked, selectedGenre, selectedSubgenre }) => {
 
 
     const [values, setValues] = useState({
+        genre : selectedGenre.name,
+        subgenre : selectedSubgenre.name,
         title: false,
         author: '',
         isbn: false,
         publisher: '',
+        date: '',
         number: false,
         format: '',
         edition: '',
-        language: ''
+        language: '',
+        description: ''
     })
+
+    console.log("selectedGenre fronm info",  selectedSubgenre)
 
     const [options] = useState({
         authors: [
@@ -46,29 +32,27 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
             { third: "This is the third Author." },
         ],
         publishers: [
-            { first: "This is the first Publisher " },
+            { first: "This is the first Publisher" },
             { second: "This is the second Publisher." },
             { third: "This is the third Publisher." }
         ],
         formats: [
-            { one: "First Format. " },
-            { two: "Second Format. " },
-            { three: "Third Format. " },
-            { four: "Fourth Format. " }
+            { one: "First Format." },
+            { two: "Second Format." },
+            { three: "Third Format." },
+            { four: "Fourth Format." }
         ],
         languages: [
-            { english: "English " },
-            { german: "German " },
-            { portugese: "Portugese " },
-            { italian: "Italian " },
-            { russian: "Russian " },
-            { japan: "Japan " }
+            { english: "English" },
+            { german: "German" },
+            { portugese: "Portugese" },
+            { italian: "Italian" },
+            { russian: "Russian" },
+            { japan: "Japan" }
         ]
     })
 
-
     const [id, setId] = useState('')
-    const [startDate, setStartDate] = useState(Date.now());
 
     // const [touched, setTouched] = useState('')
 
@@ -80,7 +64,7 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
         const { id, value } = e.target
         console.log(value)
         setValues({
-            ...values, [id]: value
+            ...values, [id]: value.toString()
         })
         // setId({
         //     id: id
@@ -99,58 +83,68 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
     const notRequired = false
 
 
-    const changeDate = (time) => {
-        setStartDate(time)
-        try { console.log(time) }
-        catch (err) {
-            console.log(err.message)
-        }
+    const changeDate = (date, dateString) => {
+        console.log(date, dateString);
+        setValues({
+            ...values, date: dateString
+        })
     }
     return (
         <Wrapper>
             <h1> INFORMATION </h1>
 
-
             <Form>
                 <FormGroup>
 
-
-                    <DatePicker
-                        // selected={startDate}
-                        value="DD/MM/YY"
-                        onChange={changeDate}
-                    />
+                    {/* <Input onChange={change} placeholder="Basic usage" id="title" invalid= 'true' /> */}
 
                     <label>Book Title</label>
-                    {/* <FormInput onChange={change} id="title" invalid={values.title === ''} placeholder="Book Title" className="mb-2" /> */}
+                    <FormInput onChange={change} id="title" invalid={values.title === ''} placeholder="Book Title" className="mb-2" />
 
-                    <TextIn change={change} id="title" invalid={values.title === ''} placeholder="Book Title" />
 
                     <label>Author</label>
-
-                    <SelectIt id="author" heading="Author" received={options.authors} change={change} />
+                    <SelectIt
+                        id="author"
+                        placeholder="Authors"
+                        options={options.authors}
+                        values={values}
+                        setValues={setValues}
+                    />
 
                     <label>ISBN</label>
-                    <FormInput onChange={change} id="isbn" invalid={values.isbn === ''} placeholder="ISBN" className="mb-2" />
+                    <FormInput onChange={change} id="isbn" invalid={notRequired} placeholder="ISBN" className="mb-2" />
 
                     <label>Publisher</label>
 
-                    <SelectIt id="publisher" heading="Publishers" received={options.publishers} change={change} />
+                    <SelectIt
+                        id="publisher"
+                        placeholder="Publishers"
+                        options={options.publishers}
+                        values={values}
+                        setValues={setValues}
+                    />
 
-                    <h3> INSERT DATEPICKER HERE </h3>
+                    <label>Date published</label>
+                    <DatePicker
+                        className="date-picker "
+                        onChange={changeDate}
+                        placeholder="DD/MM/YYYY"
+                        format={"DD/MM/YYYY"}
+                    />
+                    <br />
 
-                    {/* 
-                        TODO: insert datepicker
-                    */}
                     <label>Number of pages</label>
                     <FormInput type="number" onChange={change} id="number" min="1" max="4999" invalid={values.number === ''} placeholder="Number of pages" className="mb-2 number-input" />
 
-                    {/* 
-                        TODO: number of pages cut on validation
-                    */}
 
                     <label>Format</label>
-                    <SelectIt id="format" heading="formats" received={options.formats} change={change} />
+                    <SelectIt
+                        id="format"
+                        placeholder="Formats"
+                        options={options.formats}
+                        values={values}
+                        setValues={setValues}
+                    />
 
                     <div className="small-input-container" >
 
@@ -162,15 +156,22 @@ const Information = ({ pageCount, setPageCount, addSub }) => {
                         <div className="small-input-editions">
 
                             <label>Edition language</label>
-                            <SelectIt id="language" heading="Edition language" received={options.languages} change={change} />
-
+                            <SelectIt
+                                id="language"
+                                placeholder="Languages"
+                                options={options.languages}
+                                values={values}
+                                setValues={setValues}
+                            />
                         </div>
 
-                        {/* 
-                        TODO: insert description textbox
-                        */}
 
-
+                        {isChecked &&
+                            <>
+                                <label>Edition language</label>
+                                <Input.TextArea id="description" onChange={change} rows={4} />
+                            </>
+                        }
                     </div>
                 </FormGroup>
             </Form>

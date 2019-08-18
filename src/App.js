@@ -6,6 +6,7 @@ import Header from "./containers/Header"
 import Steps from "./containers/Steps"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "shards-ui/dist/css/shards.min.css"
+import 'antd/dist/antd.css'
 
 
 const ExampleRoute = () => <h2>ExampleRoute</h2>

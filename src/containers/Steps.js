@@ -27,7 +27,7 @@ const Steps = ({
 
     const [addSub, setAddSub] = useState(true)
 
-    
+
     console.log('%cSTATE SELECTED', react, selectedBtn)
 
     console.log("%cSELECTED GENRE", redux, selectedGenre)
@@ -36,6 +36,17 @@ const Steps = ({
 
 
     console.log("%cSELECTED SUBGENRE", redux, selectedSubgenre)
+
+    const [isChecked, setIsChecked] = useState({ checked: false })
+
+    console.log("CHECKED STATE", isChecked)
+    const descriptionToggle = () => {
+        setIsChecked(prevState => ({ ...prevState, checked: !prevState.checked }));
+    };
+
+
+    console.log("CHECKED STATE", isChecked.checked)
+
 
     return (
 
@@ -63,7 +74,7 @@ const Steps = ({
                     setPageCount={setPageCount}
                     selectedBtn={selectedBtn}
                     setSelectedBtn={setSelectedBtn}
-                    
+
                     selectGenre={selectGenre}
                     selectedGenre={selectedGenre}
 
@@ -74,12 +85,27 @@ const Steps = ({
 
             {/* STEP 3 */}
             {(pageCount === 3) &&
-                <AddSubgenre pageCount={pageCount} setPageCount={setPageCount} />
+                <AddSubgenre
+                    pageCount={pageCount}
+                    setPageCount={setPageCount}
+                    descriptionToggle={descriptionToggle}
+                    isChecked={isChecked}
+
+                />
             }
 
             {/* STEP 4 */}
-            {(pageCount === 1) &&
-                <Information pageCount={pageCount} setPageCount={setPageCount} addSub={addSub} />
+            {(pageCount === 4) &&
+                <Information
+                    pageCount={pageCount}
+                    setPageCount={setPageCount}
+                    addSub={addSub}
+                    isChecked={isChecked.checked}
+                    selectedGenre={selectedGenre}
+                    selectedSubgenre={selectedSubgenre}
+                    
+                    
+                />
             }
 
             {/* STEP 5 */}

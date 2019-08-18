@@ -13,19 +13,19 @@ const SelectGenre = ({
 }) => {
     return (
         <Wrapper>
-             <div className="buttons-container">
-            {init.genres.map(x => {
-                return (
-                    <Button className = "buttons" outline theme = "secondary" active = {selectedBtn === x.name}
-                        onClick={() => { selectGenre(x); setSelectedBtn(x.name) }} key={x.id} >
-                        {x.name}
-                    </Button>)
-            })
-            }
-             </div>
+            <div className="buttons-container">
+                {init.genres.map(x => {
+                    return (
+                        <Button className="buttons" outline theme="secondary" active={selectedBtn === x.name}
+                            onClick={() => { selectGenre(x); setSelectedBtn(x.name) }} key={x.id} >
+                            {x.name}
+                        </Button>)
+                })
+                }
+            </div>
             <br />
 
-            <Button  theme = "secondary" onClick={() => { setPageCount(pageCount + 1) }} disabled={!selectedBtn}> NEXT </Button>
+            <Button theme="secondary" onClick={() => { setPageCount(pageCount + 1) }} disabled={!selectedBtn}> NEXT </Button>
             <hr />
             {JSON.stringify(selectedGenre)}
         </Wrapper>
