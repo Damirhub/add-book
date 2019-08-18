@@ -24,6 +24,7 @@ const Steps = ({
     console.log('PAGE COUNT', pageCount)
 
     const [selectedBtn, setSelectedBtn] = useState('')
+    console.log('selectedBtn COUNT', selectedBtn)
 
     const [addSub, setAddSub] = useState(true)
 
@@ -31,15 +32,9 @@ const Steps = ({
     console.log('%cSTATE SELECTED', react, selectedBtn)
 
     console.log("%cSELECTED GENRE", redux, selectedGenre)
-    console.log("%cAVAILABLE  SUBGENRES", redux, selectedGenre.subgenres)
-    console.log("%cSELECTED  MAPPED", redux, selectedGenre && selectedGenre.subgenres.map(x => x.name))
-
-
     console.log("%cSELECTED SUBGENRE", redux, selectedSubgenre)
 
     const [isChecked, setIsChecked] = useState({ checked: false })
-
-    console.log("CHECKED STATE", isChecked)
     const descriptionToggle = () => {
         setIsChecked(prevState => ({ ...prevState, checked: !prevState.checked }));
     };
@@ -49,7 +44,7 @@ const Steps = ({
 
 
     return (
-
+        // TODO: REACT MEMO
         <React.Fragment>
 
             {/* STEP 1 */}
@@ -57,11 +52,12 @@ const Steps = ({
                 <SelectGenre
                     init={init}
                     pageCount={pageCount}
-                    setPageCount={setPageCount}
+
                     selectedBtn={selectedBtn}
-                    setSelectedBtn={setSelectedBtn}
+                    setPageCount={setPageCount}
+
                     selectGenre={selectGenre}
-                    selectedGenre={selectedGenre}
+                    setSelectedBtn={setSelectedBtn}
                 />
             }
 
@@ -70,8 +66,10 @@ const Steps = ({
                 <SelectSubgenre
                     addSub={addSub}
                     setAddSub={setAddSub}
+
                     pageCount={pageCount}
                     setPageCount={setPageCount}
+
                     selectedBtn={selectedBtn}
                     setSelectedBtn={setSelectedBtn}
 
@@ -86,31 +84,34 @@ const Steps = ({
             {/* STEP 3 */}
             {(pageCount === 3) &&
                 <AddSubgenre
+                    isChecked={isChecked}
+                    descriptionToggle={descriptionToggle}
+
                     pageCount={pageCount}
                     setPageCount={setPageCount}
-                    descriptionToggle={descriptionToggle}
-                    isChecked={isChecked}
 
+                    selectSubgenre={selectSubgenre}
+                    selectedSubgenre={selectedSubgenre}
                 />
             }
 
             {/* STEP 4 */}
             {(pageCount === 4) &&
                 <Information
-                    pageCount={pageCount}
-                    setPageCount={setPageCount}
                     addSub={addSub}
                     isChecked={isChecked.checked}
+
+                    pageCount={pageCount}
+                    setPageCount={setPageCount}
+
                     selectedGenre={selectedGenre}
                     selectedSubgenre={selectedSubgenre}
-                    
-                    
                 />
             }
 
             {/* STEP 5 */}
             {(pageCount === 0) &&
-                <Finished pageCount={pageCount} setPageCount={setPageCount} />
+                <Finished pageCount={pageCount} setPageCount={setPageCount} setSelectedBtn={setSelectedBtn} selectedBtn={selectedBtn} />
             }
 
         </React.Fragment>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from "shards-react"
 import Wrapper from '../containers/UI/Wrapper';
+import { Icon } from "antd"
 
 
 const SelectSubgenre = ({
@@ -15,23 +16,31 @@ const SelectSubgenre = ({
     console.log('SELECTED SUBGENRE', rx.selectedSubgenre)
     return (
         <Wrapper>
-            {rx.selectedGenre && rx.selectedGenre.subgenres.map(z => {
-                return (
-                    <Button outline theme="secondary" active={(!addSub && selectedBtn) === z.name}
-                        onClick={() => { rx.selectSubgenre(z); setAddSub(false); setSelectedBtn(z.name) }} key={z.id} >
-                        {[z.name]}
-                    </Button>)
-            })
-            }
+            <div className="buttons-container">
+                {rx.selectedGenre && rx.selectedGenre.subgenres.map(z => {
+                    return (
+                        <Button className="buttons" outline theme="secondary" active={(!addSub && selectedBtn) === z.name}
+                            onClick={() => { rx.selectSubgenre(z); setAddSub(false); setSelectedBtn(z.name) }} key={z.id} >
+                            {[z.name]}
+                        </Button>)
+                })
+                }
 
-            <Button outline theme="secondary" onClick={() => setAddSub(true)} active={addSub}> Add Subgenre </Button>
+                <Button className="buttons" outline theme="secondary"
+                    onClick={() => setAddSub(true)} active={addSub}> Add New
+            </Button>
+            </div>
             <hr />
-            <Button outline theme="secondary" onClick={() => setPageCount(pageCount - 1)}> BACK </Button>
+            <Button className="buttons-nav" outline theme="secondary"
+                onClick={() => setPageCount(pageCount - 1)}>
+                <Icon type="left" /> Back
+            </Button>
 
-            <Button theme="secondary" onClick={addSub ? () => setPageCount(pageCount + 1) : () => setPageCount(pageCount + 2)}> NEXT </Button>
+            <Button className="buttons-nav" theme="secondary"
+                onClick={addSub ? () => setPageCount(pageCount + 1) : () => setPageCount(pageCount + 2)}> Next
+            </Button>
 
             <hr />
-            {JSON.stringify(rx.selectedSubgenre)}
 
         </Wrapper>
     )

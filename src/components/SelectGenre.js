@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from "shards-react"
 import Wrapper from '../containers/UI/Wrapper';
 
@@ -9,8 +9,12 @@ const SelectGenre = ({
     selectedBtn,
     setSelectedBtn,
     selectGenre,
-    selectedGenre,
 }) => {
+
+    useEffect(() => {
+        setSelectedBtn('')
+    }, [])
+
     return (
         <Wrapper>
             <div className="buttons-container">
@@ -23,11 +27,14 @@ const SelectGenre = ({
                 })
                 }
             </div>
-            <br />
 
-            <Button theme="secondary" onClick={() => { setPageCount(pageCount + 1) }} disabled={!selectedBtn}> NEXT </Button>
-            <hr />
-            {JSON.stringify(selectedGenre)}
+
+            <Button className="buttons-nav" theme="secondary"
+                disabled={!selectedBtn}
+                // disabled={selectedGenre.name === '' || !selectedBtn}
+                onClick={() => { setPageCount(pageCount + 1) }} > Next
+            </Button>
+
         </Wrapper>
     )
 }

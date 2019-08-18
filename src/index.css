@@ -26,12 +26,10 @@ body {
   border-bottom: 2px solid#5a6169 !important;
 }
 
-/* span .custom-control-description  {
-  margin-top: -10px !important;
-} */
 
 .checkbox-description {
-    margin-top: -10px !important;
+  position: relative;
+  top: -19px;
   }
 
 .buttons-container {
@@ -48,6 +46,14 @@ body {
   width: 130px;
   height: 50px;
   margin-bottom: 20px;
+  
+}
+
+.buttons-nav {
+
+  width: 100px;
+  height: 40px;
+  margin: 0 10px;
 }
 
 .form-control {
@@ -85,24 +91,6 @@ body {
 }
 
 
-/* 
-.custom-select {
-  display: inline-block;
-  width: 100%;
-  height: calc(1.5em + .75rem + 2px);
-  padding: .375rem 1.75rem .375rem .75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  vertical-align: middle;
-  background: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e) no-repeat right .75rem center/8px 10px;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
-  -webkit-appearance: none;
-  appearance: none;
-} */
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -190,3 +178,44 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   padding-right: 0 !important; 
   background-image: none !important;
 }
+
+
+
+
+.circle {
+  margin: 40px auto 25px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50% 50%;
+  background: #e7ecf2;
+}
+.check-icon {
+  font-size: 50px;
+  color: #5a6169 !important;
+}
+i.anticon.anticon-check.check-icon {
+  color: #93989d !important;
+  position: relative;
+  top: 45px;
+}
+
+.ant-btn {
+  background: #5a6169 !important
+  
+}
+
+.anticon.anticon-left {
+  position: relative;
+  top: -3px;
+  right: 5px;
+  /* padding-right: 5px; */
+  font-size: 16px;
+}
+
+.add-another {
+  width: 300px;
+  height: 40px;
+  margin-bottom: 30px;
+}
+
+
