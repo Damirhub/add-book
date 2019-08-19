@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button } from "shards-react"
 import Wrapper from '../containers/UI/Wrapper';
+import Wizard from '../containers/UI/Wizard';
 
 const SelectGenre = ({
     init,
@@ -17,6 +18,7 @@ const SelectGenre = ({
 
     return (
         <Wrapper>
+            <Wizard pageCount = {pageCount}/>
             <div className="buttons-container">
                 {init.genres.map(x => {
                     return (

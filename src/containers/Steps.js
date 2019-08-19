@@ -51,9 +51,9 @@ const Steps = ({
             {(pageCount === 1) &&
                 <SelectGenre
                     init={init}
-                    pageCount={pageCount}
-
                     selectedBtn={selectedBtn}
+
+                    pageCount={pageCount}
                     setPageCount={setPageCount}
 
                     selectGenre={selectGenre}
@@ -111,7 +111,13 @@ const Steps = ({
 
             {/* STEP 5 */}
             {(pageCount === 0) &&
-                <Finished pageCount={pageCount} setPageCount={setPageCount} setSelectedBtn={setSelectedBtn} selectedBtn={selectedBtn} />
+                <Finished
+                    pageCount={pageCount}
+                    setPageCount={setPageCount}
+
+                    selectedBtn={selectedBtn}
+                    setSelectedBtn={setSelectedBtn}
+                />
             }
 
         </React.Fragment>

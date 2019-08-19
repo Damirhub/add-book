@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from "shards-react"
 import Wrapper from '../containers/UI/Wrapper';
 import { Icon } from "antd"
+import Wizard from '../containers/UI/Wizard';
 
 
 const SelectSubgenre = ({
@@ -16,6 +17,7 @@ const SelectSubgenre = ({
     console.log('SELECTED SUBGENRE', rx.selectedSubgenre)
     return (
         <Wrapper>
+            <Wizard pageCount = {pageCount}/>
             <div className="buttons-container">
                 {rx.selectedGenre && rx.selectedGenre.subgenres.map(z => {
                     return (

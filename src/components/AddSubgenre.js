@@ -3,6 +3,7 @@ import { Button } from 'shards-react'
 import { FormCheckbox, FormInput } from 'shards-react'
 import Wrapper from '../containers/UI/Wrapper';
 import { Icon } from 'antd'
+import Wizard from '../containers/UI/Wizard';
 
 const AddSubgenre = ({ pageCount, setPageCount, descriptionToggle, isChecked, ...rx }) => {
 
@@ -17,6 +18,8 @@ const AddSubgenre = ({ pageCount, setPageCount, descriptionToggle, isChecked, ..
     console.log("rx.selectSubgenre", rx.selectedSubgenre)
     return (
         <Wrapper>
+            
+            <Wizard pageCount = {pageCount}/>
             <FormInput
                 onChange={handleChange}
                 id="subgenre"

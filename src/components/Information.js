@@ -3,9 +3,10 @@ import { Button, Form, FormGroup, FormInput } from 'shards-react'
 import Wrapper from '../containers/UI/Wrapper';
 import SelectIt from '../containers/UI/Select';
 import { DatePicker, Input, Icon } from 'antd';
-import { options } from '../containers/UI/optionsConfig';
+import { options } from '../optionsConfig';
+import Wizard from '../containers/UI/Wizard';
 
-
+// TODO: isDescriptionRequired
 
 const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
 
@@ -27,7 +28,6 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
 
     console.table(values);
 
-
     const handleChange = (e) => {
         const { id, value } = e.target
         setValues({
@@ -45,7 +45,8 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
     }
     return (
         <Wrapper>
-            <h1> INFORMATION </h1>
+            
+            <Wizard pageCount = {pageCount}/>
 
             <Form>
                 <FormGroup>
@@ -113,7 +114,8 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
                             />
                         </div>
 
-                        {isChecked &&
+                        {console.log( "REQUIRED DESC? ", rx.selectedSubgenre.isDescriptionRequired)}
+                        {isChecked ||  rx.selectedSubgenre.isDescriptionRequired && 
                             <>
                                 <label>Edition language</label>
                                 <Input.TextArea id="description" onChange={change} rows={4} />
