@@ -13,12 +13,24 @@
     background: #e8ebf4;
     border-radius: 50% 50%;
 }
+
+.wizard-circle-active {
+    display: inline-block;
+    height: 42px;
+    width: 42px;
+    background: red;
+    border-radius: 50% 50%;
+}
 .wizard-circle:first-child {
     margin-left: 25px;
 }
 
 .wizard-circle:last-child {
     margin-right: 25px;
+}
+.wizard-circle span {
+    position: relative;
+    top: 10px;
 }
 
 .wizard-dash {
