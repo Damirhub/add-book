@@ -1,5 +1,6 @@
 
-export const options = {
+export const options = 
+{
     authors: [
         { first: "This is the first Author." },
         { second: "This is the second Author." },

@@ -1,0 +1,38 @@
+.wizard-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+.wizard-circle {
+    display: inline-block;
+    height: 42px;
+    width: 42px;
+    background: #e8ebf4;
+    border-radius: 50% 50%;
+}
+.wizard-circle:first-child {
+    margin-left: 25px;
+}
+
+.wizard-circle:last-child {
+    margin-right: 25px;
+}
+
+.wizard-dash {
+    border-bottom: 1px solid black;
+    width: 100px;
+    height: 21px;
+}
+
+.wizard-container p {
+    width: 150px;
+    position: relative;
+    top: 25px;
+    left: -54px;
+    font-size: 13px;
+    font-weight: 900;
+
+}

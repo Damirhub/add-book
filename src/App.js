@@ -7,6 +7,7 @@ import Steps from "./containers/Steps"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "shards-ui/dist/css/shards.min.css"
 import 'antd/dist/antd.css'
+import Wizard from "./containers/UI/Wizard";
 
 
 const ExampleRoute = () => <h2>ExampleRoute</h2>
@@ -26,7 +27,8 @@ const App = () => {
           <Route exact path="/test/:id" component={ExampleRoute2} />
         </Switch>
       </Router> */}
-      <Steps />
+      {/* <Steps /> */}
+      <Wizard />
       {/* <Mockup /> */}
     </>
   )

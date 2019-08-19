@@ -15,6 +15,23 @@ export const selectSubgenre = (payload) => {
     }
 }
 
+export const pageCounter = (payload) => {
+    return {
+        type: ACTION_TYPES.PAGE_COUNTER,
+        payload
+    }
+}
+
+export const wizardSteps = (payload) => {
+    return {
+        type: ACTION_TYPES.WIZARD_STEPS,
+        payload
+    }
+}
+
+
+
+
 // ACTION CREATOR FUNCTIONS
 export const success = () => {
     return {

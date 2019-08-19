@@ -8,7 +8,8 @@ const initialState = {
     stateprop1: false,
     user_input: "",
     selectedGenre: '',
-    selectedSubGenre: '', 
+    selectedSubGenre: '',
+    pageCounter: 1,
 
     ACT: "color: lawngreen"
 }
@@ -33,11 +34,26 @@ const reducer1 = (state = initialState, action) => {
                 selectedGenre: action.payload
             }
         case ACTION_TYPES.SELECT_SUBGENRE:
-            console.log("%cACTION: SELECTED SUBGENRE!!!!!!!!!!: ", state.ACT,  action)
+            console.log("%cACTION: SELECTED SUBGENRE!!!!!!!!!!: ", state.ACT, action)
             return {
                 ...state,
                 selectedSubgenre: action.payload
             }
+
+        case ACTION_TYPES.WIZARD_STEPS:
+            console.log("%cACTION: WIZARD_STEPS!!!!!!!!!!: ", state.ACT, action)
+            return {
+                ...state,
+                wizardSteps: action.payload
+            }
+
+            case ACTION_TYPES.PAGE_COUNTER:
+                console.log("%cACTION: PAGE_COUNT!!!!!!!!!!: ", state.ACT, action)
+                return {
+                    ...state,
+                    pageCounter: action.payload
+                }
+    
 
         default:
             return state

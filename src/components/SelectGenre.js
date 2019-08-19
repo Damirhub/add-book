@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Button } from "shards-react"
 import Wrapper from '../containers/UI/Wrapper';
-import Wizard from '../containers/UI/Wizard';
 
 const SelectGenre = ({
     init,
@@ -10,15 +9,17 @@ const SelectGenre = ({
     selectedBtn,
     setSelectedBtn,
     selectGenre,
+    ...rx
 }) => {
 
     useEffect(() => {
         setSelectedBtn('')
     }, [])
 
+    rx.wizardSteps(pageCount)
+
     return (
-        <Wrapper>
-            <Wizard pageCount = {pageCount}/>
+        <>
             <div className="buttons-container">
                 {init.genres.map(x => {
                     return (
@@ -30,14 +31,12 @@ const SelectGenre = ({
                 }
             </div>
 
-
             <Button className="buttons-nav" theme="secondary"
                 disabled={!selectedBtn}
                 // disabled={selectedGenre.name === '' || !selectedBtn}
-                onClick={() => { setPageCount(pageCount + 1) }} > Next
+                onClick={() => { rx.pageCounter(pageCount + 1) }} > Next
             </Button>
-
-        </Wrapper>
+        </>
     )
 }
 

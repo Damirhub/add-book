@@ -3,7 +3,7 @@ import { Button } from 'shards-react'
 import Wrapper from '../containers/UI/Wrapper';
 import { Icon } from 'antd'
 
-const Finished = ({ pageCount, setPageCount }) => {
+const Finished = ({ pageCount, setPageCount, ...rx }) => {
     return (
         <Wrapper>
             <div className="circle">
@@ -11,7 +11,7 @@ const Finished = ({ pageCount, setPageCount }) => {
             </div>
             <h6 style={{ "marginBottom": "40px" }}> Book added successfully </h6>
 
-            <Button className="add-another" theme="secondary" onClick={() => setPageCount(pageCount + 1)}> Add another book </Button>
+            <Button className="add-another" theme="secondary" onClick={() => rx.pageCounter(pageCount + 1)}> Add another book </Button>
         </Wrapper>
     )
 }

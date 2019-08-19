@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, FormInput } from 'shards-react'
 import Wrapper from '../containers/UI/Wrapper';
 import SelectIt from '../containers/UI/Select';
 import { DatePicker, Input, Icon } from 'antd';
 import { options } from '../optionsConfig';
-import Wizard from '../containers/UI/Wizard';
 
 // TODO: isDescriptionRequired
 
 const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
 
+    useEffect(() => {
+        rx.wizardSteps(rx.wizardStep + 1)
+    }, [])
 
     const [values, setValues] = useState({
         genre: rx.selectedGenre.name,
@@ -44,9 +46,8 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
         })
     }
     return (
-        <Wrapper>
+        <>
 
-            <Wizard pageCount={pageCount} />
 
             <Form>
                 <FormGroup>
@@ -129,16 +130,19 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
                 </FormGroup>
             </Form>
 
-
             <Button className="buttons-nav" outline theme="secondary"
-                onClick={() => addSub ? setPageCount(pageCount - 1) : setPageCount(pageCount - 2)}>
+                onClick={() => {
+                    addSub ? rx.pageCounter(pageCount - 1) : rx.pageCounter(pageCount - 2);
+                    rx.wizardSteps(rx.wizardStep - 2)
+                }
+                }>
                 <Icon type="left" /> Back
             </Button>
 
             <Button className="buttons-nav" theme="secondary"
-                onClick={() => setPageCount(0)}>Add
+                onClick={() => rx.pageCounter(0)}>Add
             </Button>
-        </Wrapper>
+        </>
     )
 }
 
