@@ -45,8 +45,8 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
     }
     return (
         <Wrapper>
-            
-            <Wizard pageCount = {pageCount}/>
+
+            <Wizard pageCount={pageCount} />
 
             <Form>
                 <FormGroup>
@@ -114,9 +114,13 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
                             />
                         </div>
 
-                        {console.log( "REQUIRED DESC? ", rx.selectedSubgenre.isDescriptionRequired)}
-                        {isChecked ||  rx.selectedSubgenre.isDescriptionRequired && 
+                        {console.log("REQUIRED DESC? ", rx.selectedSubgenre.isDescriptionRequired)}
+                        {(rx.selectedSubgenre.isDescriptionRequired) ?
                             <>
+                                <label>Edition language</label>
+                                <Input.TextArea id="description" onChange={change} rows={4} />
+                            </> :
+                            isChecked && <>
                                 <label>Edition language</label>
                                 <Input.TextArea id="description" onChange={change} rows={4} />
                             </>
@@ -126,12 +130,12 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
             </Form>
 
 
-            <Button className="buttons-nav" outline theme="secondary" 
+            <Button className="buttons-nav" outline theme="secondary"
                 onClick={() => addSub ? setPageCount(pageCount - 1) : setPageCount(pageCount - 2)}>
-                <Icon type="left" /> Back 
+                <Icon type="left" /> Back
             </Button>
 
-            <Button className="buttons-nav" theme="secondary" 
+            <Button className="buttons-nav" theme="secondary"
                 onClick={() => setPageCount(0)}>Add
             </Button>
         </Wrapper>

@@ -84,8 +84,10 @@ const Steps = ({
             {/* STEP 3 */}
             {(pageCount === 3) &&
                 <AddSubgenre
-                    isChecked={isChecked}
                     descriptionToggle={descriptionToggle}
+                    
+                    isChecked={isChecked}
+                    setIsChecked={setIsChecked}
 
                     pageCount={pageCount}
                     setPageCount={setPageCount}

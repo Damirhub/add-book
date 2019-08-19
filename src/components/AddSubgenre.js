@@ -5,10 +5,11 @@ import Wrapper from '../containers/UI/Wrapper';
 import { Icon } from 'antd'
 import Wizard from '../containers/UI/Wizard';
 
-const AddSubgenre = ({ pageCount, setPageCount, descriptionToggle, isChecked, ...rx }) => {
+const AddSubgenre = ({ pageCount, setPageCount, descriptionToggle, isChecked, setIsChecked, ...rx }) => {
 
     useEffect(() => {
         rx.selectSubgenre({ name: '' })
+        setIsChecked({checked : false})
     }, [])
 
     const handleChange = (e) => {
