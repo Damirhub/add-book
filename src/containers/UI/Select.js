@@ -5,7 +5,7 @@ import { Select } from 'antd'
 
 const SelectIt = ({ options, id, placeholder, values, setValues }) => {
 
-    const { Option } = Select;
+    const { Option } = Select
 
     function onChange(value, id) {
         setValues({

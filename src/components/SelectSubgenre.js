@@ -37,7 +37,7 @@ const SelectSubgenre = ({
                     active={rx.addNewSub}
                     onClick={() => {
                         setEnabled(true)
-                        rx.addNewSubSet(true);
+                        rx.addNewSubSet(true)
                     }}
                 > Add New
             </Button>

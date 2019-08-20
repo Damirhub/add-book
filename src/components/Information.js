@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, FormInput } from 'shards-react'
-import SelectIt from '../containers/UI/Select';
-import { DatePicker, Input, Icon } from 'antd';
-import { options } from '../optionsConfig';
+import SelectIt from '../containers/UI/Select'
+import { DatePicker, Input, Icon } from 'antd'
+import { options } from '../optionsConfig'
 
 
 const Information = ({ isChecked, ...rx }) => {
 
     useEffect(() => {
         rx.wizardSteps(rx.wizardStep + 1)
+        window.scrollTo(0, 0)
     }, [])
 
     const [values, setValues] = useState({
@@ -23,10 +24,10 @@ const Information = ({ isChecked, ...rx }) => {
         format: '',
         edition: '',
         language: '',
-        description: ''
+        description: false
     })
 
-    console.table(values);
+    console.table(values)
 
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -35,13 +36,15 @@ const Information = ({ isChecked, ...rx }) => {
         })
     }
 
+    const descriptionNeeded = rx.selectedSubgenre.isDescriptionRequired
+
     const change = (e) => handleChange(e)
 
     const changeDate = (date, dateString) => {
         setValues({
             ...values, date: dateString
         })
-    }
+    }// TODO: REACT MEMO
     return (
         <>
             <Form>
@@ -65,7 +68,7 @@ const Information = ({ isChecked, ...rx }) => {
                     <label>Publisher</label>
                     <SelectIt
                         id="publisher"
-                        placeholder="Publishers"
+                        placeholder="Publisher"
                         options={options.publishers}
                         values={values}
                         setValues={setValues}
@@ -110,15 +113,17 @@ const Information = ({ isChecked, ...rx }) => {
                             />
                         </div>
 
-                        {(rx.selectedSubgenre.isDescriptionRequired) ?
-                            <>
-                                <label>Edition language</label>
-                                <Input.TextArea id="description" onChange={change} rows={4} />
-                            </> :
-                            isChecked && <>
-                                <label>Edition language</label>
-                                <Input.TextArea id="description" onChange={change} rows={4} />
-                            </>
+                        {
+                            (descriptionNeeded) ?
+                                <>
+                                    <label>Edition language</label>
+                                    <Input.TextArea id="description" onChange={change} rows={4}  />
+                                </> :
+                                isChecked &&
+                                <>
+                                    <label>Edition language</label>
+                                    <Input.TextArea id="description" onChange={change} rows={4}  />
+                                </>
                         }
                     </div>
                 </FormGroup>
@@ -126,17 +131,21 @@ const Information = ({ isChecked, ...rx }) => {
 
             <div className="buttons-nav-container">
 
-            <Button className="buttons-nav" outline theme="secondary"
-                onClick={() => {
-                    rx.addNewSub ? rx.pageCounter(rx.pageCount - 1) : rx.pageCounter(rx.pageCount - 2);
-                    rx.wizardSteps(rx.wizardStep - 2)
-                }
-                }>
-                <Icon type="left" /> Back
+                <Button className="buttons-nav" outline theme="secondary"
+                    onClick={() => {
+                        rx.addNewSub ? rx.pageCounter(rx.pageCount - 1) : rx.pageCounter(rx.pageCount - 2)
+                        rx.wizardSteps(rx.wizardStep - 2)
+                    }
+                    }>
+                    <Icon type="left" /> Back
             </Button>
 
-            <Button className="buttons-nav" theme="secondary"
-                onClick={() => rx.pageCounter(0)}>Add
+                <Button className="buttons-nav" theme="secondary"
+                    disabled={
+                        !values.title || !values.author || !values.publisher ||
+                        !values.description && (descriptionNeeded || isChecked)
+                    }
+                    onClick={() => rx.pageCounter(0)}>Add
             </Button>
 
             </div>

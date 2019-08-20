@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import * as ACTIONS from "../store/actions/actions"
-
 import { connect } from "react-redux"
 import init from '../config'
 import SelectGenre from "../components/SelectGenre"
@@ -8,10 +7,6 @@ import SelectSubgenre from "../components/SelectSubgenre"
 import AddSubgenre from "../components/AddSubgenre"
 import Information from "../components/Information"
 import Finished from "../components/Finished"
-import Wizard from "./UI/Wizard";
-
-const react = "color: deepskyblue"
-const redux = "color: orchid"
 
 const Steps = ({
     selectGenre,
@@ -28,23 +23,14 @@ const Steps = ({
 }) => {
 
     const [selectedBtn, setSelectedBtn] = useState('')
-    console.log('selectedBtn COUNT', selectedBtn)
-
-    console.log('%cSTATE SELECTED', react, selectedBtn)
-
-    console.log("%cSELECTED GENRE", redux, selectedGenre)
-    console.log("%cSELECTED SUBGENRE", redux, selectedSubgenre)
-
     const [isChecked, setIsChecked] = useState({ checked: false })
+    
     const descriptionToggle = () => {
-        setIsChecked(prevState => ({ ...prevState, checked: !prevState.checked }));
-    };
-
-
-    console.log("CHECKED STATE", isChecked.checked)
+        setIsChecked(prevState => ({ ...prevState, checked: !prevState.checked }))
+    }
 
     return (
-        // TODO: REACT MEMO
+        
         <React.Fragment>
 
             {/* STEP 1 */}
@@ -68,7 +54,6 @@ const Steps = ({
             {/* STEP 2 */}
             {pageCount === 2 &&
                 <SelectSubgenre
-
                     selectedBtn={selectedBtn}
                     setSelectedBtn={setSelectedBtn}
 
@@ -110,7 +95,6 @@ const Steps = ({
             {/* STEP 4 */}
             {(pageCount === 4) &&
                 <Information
-
                     isChecked={isChecked.checked}
                     addNewSub = {addNewSub}
 
