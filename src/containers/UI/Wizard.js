@@ -1,60 +1,51 @@
 import React from 'react'
 import Steps from '../Steps'
 import { connect } from "react-redux"
-import * as ACTIONS from "../../store/actions/actions"
 import './Wizard.css'
 import Wrapper from './Wrapper';
 
 
-const Wizard = ({ pageCount, pageCounter, wizardStep }) => {
+const Wizard = ({ pageCount, wizardStep, addNewSub }) => {
 
-    // TODO: make modules from wizard css
-
-    console.log("%c PAGE COUNT FROM WIZARD", "color: aqua", pageCount)
     return (
         <Wrapper>
             {
                 pageCount !== 0 &&
-                <h1 style={{ "background": "red" }} >{wizardStep} </h1>
+                <div className="wizard-container">
+                    <div className={"wizard-circle" + (pageCount === 1 ? " active" : '')} >
+                        <span>1</span>
+                        <p>Genre</p>
+                    </div>
+                    <div className="wizard-dash" />
+                    <div className={"wizard-circle" + (pageCount === 2 ? " active" : '')} >
+                        <span>2</span>
+                        <p>Subgenre</p>
+                    </div>
+
+                    <div className="wizard-dash" />
+                    <div className={"wizard-circle" + (wizardStep === 3 ? " active" : '')}>
+                        {
+                            wizardStep !== 3 && !addNewSub && <span> ... </span>
+                        }
+                        {
+                            (wizardStep === 3 && !addNewSub) && <><span>3</span> <p>Information</p></>
+                        }
+                        {
+                            (!addNewSub) ? <span></span> : <><span>3</span> <p>Add new subgenre</p></>
+                        }
+                    </div>
+
+
+                    <div className=
+                        {"wizard-dash" + (!addNewSub ? " wizard-hide" : '')}
+                    />
+                    <div className=
+                        {"wizard-circle" + (!addNewSub ? " wizard-hide" : '') + (pageCount === 4 ? " active" : '')}>
+                        <span>4</span>
+                        <p>Information</p>
+                    </div>
+                </div>
             }
-
-            {
-                pageCount !== 0 &&
-                <h1 style={{ "background": "red" }} >{wizardStep} </h1>
-            }
-
-            <div className="wizard-container">
-                <div className= {"wizard-circle" + (pageCount == 1 && " wizard-circle-active")} >
-                    <span>1</span>
-                    <p>Genre</p>
-                </div>
-                <div className="wizard-dash" />
-                <div className="wizard-circle">
-                    <span>2</span>
-                    <p>Subgenre</p>
-                </div>
-                <div className="wizard-dash" />
-                <div className="wizard-circle">
-                    <span>3</span>
-                    <p>Add new subgenre</p>
-
-
-                </div>
-                <div className="wizard-dash" />
-                <div className="wizard-circle">
-                    <span>4</span>
-
-                    <p>Information</p>
-
-                </div>
-            </div>
-
-            {/* <button onClick = { () => pageCounter(1)} >  NUSSUSSU </button>
-<button onClick = { () => pageCounter(2)} >  NUSSUSSU </button>
-<button onClick = { () => pageCounter(3)} >  NUSSUSSU </button>
-<button onClick = { () => pageCounter(4)} >  NUSSUSSU </button> */}
-
-
             <Steps />
         </Wrapper>
     )
@@ -63,21 +54,13 @@ const Wizard = ({ pageCount, pageCounter, wizardStep }) => {
 const mapStateToProps = state => {
     return {
 
-        wizardStep: state.reducer1.wizardSteps,
-        pageCount: state.reducer1.pageCounter
+        wizardStep: state.wizardSteps,
+        pageCount: state.pageCounter,
+        addNewSub: state.addNewSub,
     }
 }
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-
-
-//         pageCounter: (page) => dispatch(ACTIONS.pageCounter(page))
-//     }
-// }
 
 
 export default connect(
     mapStateToProps,
-    // mapDispatchToProps
 )(Wizard)

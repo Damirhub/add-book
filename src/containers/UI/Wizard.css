@@ -12,15 +12,14 @@
     width: 42px;
     background: #e8ebf4;
     border-radius: 50% 50%;
+    font-size: 16px;
+    font-weight: 900;
 }
 
-.wizard-circle-active {
-    display: inline-block;
-    height: 42px;
-    width: 42px;
-    background: red;
-    border-radius: 50% 50%;
+.wizard-circle.active {
+    background: #5a6169;
 }
+
 .wizard-circle:first-child {
     margin-left: 25px;
 }
@@ -30,7 +29,7 @@
 }
 .wizard-circle span {
     position: relative;
-    top: 10px;
+    top: 9px;
 }
 
 .wizard-dash {
@@ -46,5 +45,8 @@
     left: -54px;
     font-size: 13px;
     font-weight: 900;
+}
 
+.wizard-hide {
+    visibility: hidden;
 }

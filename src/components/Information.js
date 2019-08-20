@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, FormInput } from 'shards-react'
-import Wrapper from '../containers/UI/Wrapper';
 import SelectIt from '../containers/UI/Select';
 import { DatePicker, Input, Icon } from 'antd';
 import { options } from '../optionsConfig';
 
-// TODO: isDescriptionRequired
 
-const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
+const Information = ({ isChecked, ...rx }) => {
 
     useEffect(() => {
         rx.wizardSteps(rx.wizardStep + 1)
@@ -40,15 +38,12 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
     const change = (e) => handleChange(e)
 
     const changeDate = (date, dateString) => {
-        console.log(date, dateString);
         setValues({
             ...values, date: dateString
         })
     }
     return (
         <>
-
-
             <Form>
                 <FormGroup>
 
@@ -115,7 +110,6 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
                             />
                         </div>
 
-                        {console.log("REQUIRED DESC? ", rx.selectedSubgenre.isDescriptionRequired)}
                         {(rx.selectedSubgenre.isDescriptionRequired) ?
                             <>
                                 <label>Edition language</label>
@@ -130,9 +124,11 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
                 </FormGroup>
             </Form>
 
+            <div className="buttons-nav-container">
+
             <Button className="buttons-nav" outline theme="secondary"
                 onClick={() => {
-                    addSub ? rx.pageCounter(pageCount - 1) : rx.pageCounter(pageCount - 2);
+                    rx.addNewSub ? rx.pageCounter(rx.pageCount - 1) : rx.pageCounter(rx.pageCount - 2);
                     rx.wizardSteps(rx.wizardStep - 2)
                 }
                 }>
@@ -142,6 +138,8 @@ const Information = ({ pageCount, setPageCount, addSub, isChecked, ...rx }) => {
             <Button className="buttons-nav" theme="secondary"
                 onClick={() => rx.pageCounter(0)}>Add
             </Button>
+
+            </div>
         </>
     )
 }

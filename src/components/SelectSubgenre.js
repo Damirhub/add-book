@@ -1,54 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from "shards-react"
-import Wrapper from '../containers/UI/Wrapper';
 import { Icon } from "antd"
 
 
 const SelectSubgenre = ({
-    addSub,
-    setAddSub,
-    pageCount,
-    setPageCount,
     selectedBtn,
     setSelectedBtn,
     ...rx
 }) => {
-    rx.wizardSteps(pageCount)
+    const [enabled, setEnabled] = useState(false)
 
-    console.log('SELECTED SUBGENRE', rx.selectedSubgenre)
+    rx.wizardSteps(rx.pageCount)
+
+    useEffect(() => {
+        rx.addNewSubSet('')
+    }, [])
+
+    console.log("RXXXRR", rx.addNewSub)
     return (
         <>
             <div className="buttons-container">
                 {rx.selectedGenre && rx.selectedGenre.subgenres.map(z => {
                     return (
-                        <Button className="buttons" outline theme="secondary" active={(!addSub && selectedBtn) === z.name}
+                        <Button className="buttons" outline theme="secondary" active={(!rx.addNewSub && selectedBtn) === z.name}
                             onClick={() => {
+                                setEnabled(true)
                                 rx.selectSubgenre(z);
-                                // rx.wizardSteps(3); 
-                                setAddSub(false); setSelectedBtn(z.name)
+                                rx.addNewSubSet(false); setSelectedBtn(z.name)
                             }} key={z.id} >
                             {[z.name]}
-                        </Button>)
-                    })
+                        </Button>
+                    )
+                })
                 }
-
                 <Button className="buttons" outline theme="secondary"
+                    active={rx.addNewSub}
                     onClick={() => {
-                        setAddSub(true);
-                        //  rx.wizardSteps(4)
-                    }} active={addSub}> Add New
+                        setEnabled(true)
+                        rx.addNewSubSet(true);
+                    }}
+                > Add New
             </Button>
             </div>
-            <hr />
-            <Button className="buttons-nav" outline theme="secondary"
-                onClick={() => rx.pageCounter(pageCount - 1)}>
-                <Icon type="left" /> Back
+
+            <div className="buttons-nav-container">
+
+                <Button className="buttons-nav" outline theme="secondary"
+                    onClick={() => rx.pageCounter(rx.pageCount - 1)}>
+                    <Icon type="left" /> Back
             </Button>
 
-            <Button className="buttons-nav" theme="secondary"
-                onClick={addSub ? () => rx.pageCounter(pageCount + 1) : () => rx.pageCounter(pageCount + 2)}> Next
+                <Button className="buttons-nav" theme="secondary"
+                    disabled={!enabled}
+                    onClick={rx.addNewSub ? () => rx.pageCounter(rx.pageCount + 1) : () => rx.pageCounter(rx.pageCount + 2)}> Next
             </Button>
-
+            </div>
         </>
     )
 }

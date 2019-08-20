@@ -21,23 +21,19 @@ const Steps = ({
     wizardSteps,
     wizardStep,
     pageCounter,
-    pageCount
+    pageCount,
+    addNewSub,
+    addNewSubSet
+
 }) => {
-
-
-    // const [pageCount, setPageCount] = useState(1)
-    // console.log('PAGE COUNT', pageCount)
 
     const [selectedBtn, setSelectedBtn] = useState('')
     console.log('selectedBtn COUNT', selectedBtn)
 
-    const [addSub, setAddSub] = useState(true)
+    console.log('%cSTATE SELECTED', react, selectedBtn)
 
-
-    // console.log('%cSTATE SELECTED', react, selectedBtn)
-
-    // console.log("%cSELECTED GENRE", redux, selectedGenre)
-    // console.log("%cSELECTED SUBGENRE", redux, selectedSubgenre)
+    console.log("%cSELECTED GENRE", redux, selectedGenre)
+    console.log("%cSELECTED SUBGENRE", redux, selectedSubgenre)
 
     const [isChecked, setIsChecked] = useState({ checked: false })
     const descriptionToggle = () => {
@@ -57,17 +53,14 @@ const Steps = ({
                     init={init}
                     selectedBtn={selectedBtn}
 
-                    // pageCount={pageCount}
-                    // setPageCount={setPageCount}
+                    selectGenre={selectGenre}
+                    setSelectedBtn={setSelectedBtn}
 
                     pageCount={pageCount}
                     pageCounter={pageCounter}
 
-                    selectGenre={selectGenre}
-                    setSelectedBtn={setSelectedBtn}
-
-                    wizardSteps = {wizardSteps}
                     wizardStep = {wizardStep}
+                    wizardSteps = {wizardSteps}
                     
                 />
             }
@@ -75,26 +68,23 @@ const Steps = ({
             {/* STEP 2 */}
             {pageCount === 2 &&
                 <SelectSubgenre
-                    addSub={addSub}
-                    setAddSub={setAddSub}
-
-                    // pageCount={pageCount}
-                    // setPageCount={setPageCount}
-
-                    pageCount={pageCount}
-                    pageCounter={pageCounter}
 
                     selectedBtn={selectedBtn}
                     setSelectedBtn={setSelectedBtn}
 
-                    selectGenre={selectGenre}
                     selectedGenre={selectedGenre}
 
                     selectSubgenre={selectSubgenre}
                     selectedSubgenre={selectedSubgenre}
-                    
-                    wizardSteps = {wizardSteps}
+
+                    addNewSubSet = {addNewSubSet}
+                    addNewSub = {addNewSub}
+
+                    pageCount={pageCount}
+                    pageCounter={pageCounter}
+
                     wizardStep = {wizardStep}
+                    wizardSteps = {wizardSteps}
                 />
             }
 
@@ -106,69 +96,53 @@ const Steps = ({
                     isChecked={isChecked}
                     setIsChecked={setIsChecked}
 
-                    // pageCount={pageCount}
-                    // setPageCount={setPageCount}
+                    selectSubgenre={selectSubgenre}
+                    selectedSubgenre={selectedSubgenre}
 
                     pageCount={pageCount}
                     pageCounter={pageCounter}
 
-                    selectSubgenre={selectSubgenre}
-                    selectedSubgenre={selectedSubgenre}
-
-                    wizardSteps = {wizardSteps}
                     wizardStep = {wizardStep}
-
+                    wizardSteps = {wizardSteps}
                 />
             }
 
             {/* STEP 4 */}
             {(pageCount === 4) &&
                 <Information
-                    addSub={addSub}
+
                     isChecked={isChecked.checked}
-
-                    // pageCount={pageCount}
-                    // setPageCount={setPageCount}
-
-                    pageCount={pageCount}
-                    pageCounter={pageCounter}
+                    addNewSub = {addNewSub}
 
                     selectedGenre={selectedGenre}
                     selectedSubgenre={selectedSubgenre}
 
-                    wizardSteps = {wizardSteps}
-                    wizardStep = {wizardStep}
-                />
-            }
-
-            {/* STEP 5 */}
-            {(pageCount === 0) &&
-                <Finished
-                    // pageCount={pageCount}
-                    // setPageCount={setPageCount}
-
                     pageCount={pageCount}
                     pageCounter={pageCounter}
 
-                    selectedBtn={selectedBtn}
-                    setSelectedBtn={setSelectedBtn}
-                    
-                    
+                    wizardStep = {wizardStep}
+                    wizardSteps = {wizardSteps}
                 />
             }
-         {/* </Wizard> */}
+
+            {/* LAST STEP */}
+            {(pageCount === 0) &&
+                <Finished
+                    pageCount={pageCount}
+                    pageCounter={pageCounter}
+                />
+            }
         </React.Fragment>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        selectedGenre: state.reducer1.selectedGenre,
-        selectedSubgenre: state.reducer1.selectedSubgenre,
-        wizardStep: state.reducer1.wizardSteps,
-
-        pageCount: state.reducer1.pageCounter
-        
+        selectedGenre: state.selectedGenre,
+        selectedSubgenre: state.selectedSubgenre,
+        wizardStep: state.wizardSteps,   
+        pageCount: state.pageCounter,
+        addNewSub: state.addNewSub,
     }
 }
 
@@ -178,7 +152,8 @@ const mapDispatchToProps = dispatch => {
         selectSubgenre: (subgenre) => dispatch(ACTIONS.selectSubgenre(subgenre)),
         wizardSteps: (wizard) => dispatch(ACTIONS.wizardSteps(wizard)),
 
-        pageCounter: (page) => dispatch(ACTIONS.pageCounter(page))
+        pageCounter: (page) => dispatch(ACTIONS.pageCounter(page)),
+        addNewSubSet: (add) => dispatch(ACTIONS.addNewSub(add))
     }
 }
 
