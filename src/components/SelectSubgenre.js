@@ -13,7 +13,7 @@ const SelectSubgenre = ({
     rx.wizardSteps(rx.pageCount)
 
     useEffect(() => {
-        rx.addNewSubSet('')
+        rx.addNewSubSet(false)
     }, [])
 
     return (
@@ -33,7 +33,7 @@ const SelectSubgenre = ({
                 })
                 }
                 <Button className="buttons" outline theme="secondary"
-                    active={Boolean(rx.addNewSub)}
+                    active={rx.addNewSub}
                     onClick={() => {
                         setEnabled(true)
                         rx.addNewSubSet(true)
