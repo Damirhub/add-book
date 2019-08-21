@@ -19,6 +19,7 @@ const AddSubgenre = ({ descriptionToggle, isChecked, setIsChecked, ...rx }) => {
     return (
         <>
             <FormInput
+                autoFocus
                 onChange={handleChange}
                 id="subgenre"
                 placeholder="Subgenre name"
