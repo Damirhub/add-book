@@ -81,6 +81,7 @@ const Information = ({ isChecked, ...rx }) => {
                 <FormGroup>
                     <label>Book Title</label>
                     <FormInput
+                        autoFocus
                         onClick={() => setTouched({ ...touched, title: true })}
                         onChange={change} id="title" invalid={touched.title && values.title === ''}
                         placeholder="Book Title" className="mb-2" />
