@@ -76,7 +76,7 @@ const Information = ({ isChecked, ...rx }) => {
                     <label>Book Title</label>
                     <FormInput
                         autoFocus
-                        onClick={() => setTouched({ ...touched, title: true })}
+                        onBlur={() => setTouched({ ...touched, title: true })}
                         onChange={change} id="title" invalid={touched.title && values.title === ''}
                         placeholder="Book Title" className="mb-2" />
 
@@ -112,7 +112,7 @@ const Information = ({ isChecked, ...rx }) => {
 
                     <label>Number of pages</label>
                     <FormInput type="number"
-                        onClick={() => setTouched({ ...touched, number: true })}
+                        onBlur={() => setTouched({ ...touched, number: true })}
                         onChange={change} id="number" min="1" max="4999" invalid={touched.number && values.number === ''} placeholder="Number of pages" className="mb-2 number-input" />
 
                     <label>Format</label>
