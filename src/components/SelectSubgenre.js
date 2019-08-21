@@ -16,7 +16,6 @@ const SelectSubgenre = ({
         rx.addNewSubSet('')
     }, [])
 
-    console.log("RXXXRR", rx.addNewSub)
     return (
         <>
             <div className="buttons-container">
@@ -34,7 +33,7 @@ const SelectSubgenre = ({
                 })
                 }
                 <Button className="buttons" outline theme="secondary"
-                    active={rx.addNewSub}
+                    active={Boolean(rx.addNewSub)}
                     onClick={() => {
                         setEnabled(true)
                         rx.addNewSubSet(true)

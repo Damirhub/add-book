@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, FormInput } from 'shards-react'
 import SelectIt from '../containers/UI/Select'
 import { DatePicker, Input, Icon } from 'antd'
 import { options } from '../optionsConfig'
-
+import { postData } from '../utils/fetch'
 
 const Information = ({ isChecked, ...rx }) => {
 
@@ -15,19 +15,28 @@ const Information = ({ isChecked, ...rx }) => {
     const [values, setValues] = useState({
         genre: rx.selectedGenre.name,
         subgenre: rx.selectedSubgenre.name,
-        title: false,
+        title: '',
         author: '',
-        isbn: false,
+        isbn: '',
         publisher: '',
         date: '',
-        number: false,
+        number: '',
         format: '',
         edition: '',
         language: '',
-        description: false
+        description: ''
     })
 
-    console.table(values)
+    const [loader, setLoader] = useState(false)
+
+    const [touched, setTouched] = useState({ title: false, number: false })
+
+    const descriptionNeeded = rx.selectedSubgenre.isDescriptionRequired
+
+    const change = (e) => handleChange(e)
+
+
+    // console.table(values)
 
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -36,22 +45,45 @@ const Information = ({ isChecked, ...rx }) => {
         })
     }
 
-    const descriptionNeeded = rx.selectedSubgenre.isDescriptionRequired
-
-    const change = (e) => handleChange(e)
+    const handleSubmit = (values) => {
+        postData(values)
+    }
 
     const changeDate = (date, dateString) => {
         setValues({
             ...values, date: dateString
         })
-    }// TODO: REACT MEMO
+    }
+
+    const sending = () => {
+        let h = ['.', '..', '...', '....'];
+        let i = 0;
+
+        setTimeout(() => {
+            clearInterval(imagine)
+        }, 2500)
+
+        const imagine = setInterval(() => {
+            i = (i > 3) ? 0 : i;
+            console.log(`"Sending data to imaginationland" ${h[i]}`);
+            i++;
+        }, 500);
+    };
+    const required = !values.title || !values.author || !values.publisher || !values.number || !values.description
+
+    const requiredDescription = descriptionNeeded || isChecked
+
+    
+
     return (
         <>
             <Form>
                 <FormGroup>
-
                     <label>Book Title</label>
-                    <FormInput onChange={change} id="title" invalid={values.title === ''} placeholder="Book Title" className="mb-2" />
+                    <FormInput
+                        onClick={() => setTouched({ ...touched, title: true })}
+                        onChange={change} id="title" invalid={touched.title && values.title === ''}
+                        placeholder="Book Title" className="mb-2" />
 
                     <label>Author</label>
                     <SelectIt
@@ -84,7 +116,9 @@ const Information = ({ isChecked, ...rx }) => {
                     <br />
 
                     <label>Number of pages</label>
-                    <FormInput type="number" onChange={change} id="number" min="1" max="4999" invalid={values.number === ''} placeholder="Number of pages" className="mb-2 number-input" />
+                    <FormInput type="number"
+                        onClick={() => setTouched({ ...touched, number: true })}
+                        onChange={change} id="number" min="1" max="4999" invalid={touched.number && values.number === ''} placeholder="Number of pages" className="mb-2 number-input" />
 
                     <label>Format</label>
                     <SelectIt
@@ -96,7 +130,6 @@ const Information = ({ isChecked, ...rx }) => {
                     />
 
                     <div className="small-input-container" >
-
                         <div className="small-input-editions">
                             <label>Edition</label>
                             <FormInput id="edition" onChange={change} invalid={false} placeholder="Edition" className="mb-2" />
@@ -117,12 +150,12 @@ const Information = ({ isChecked, ...rx }) => {
                             (descriptionNeeded) ?
                                 <>
                                     <label>Edition language</label>
-                                    <Input.TextArea id="description" onChange={change} rows={4}  />
+                                    <Input.TextArea id="description" onChange={change} rows={4} />
                                 </> :
                                 isChecked &&
                                 <>
                                     <label>Edition language</label>
-                                    <Input.TextArea id="description" onChange={change} rows={4}  />
+                                    <Input.TextArea id="description" onChange={change} rows={4} />
                                 </>
                         }
                     </div>
@@ -130,7 +163,6 @@ const Information = ({ isChecked, ...rx }) => {
             </Form>
 
             <div className="buttons-nav-container">
-
                 <Button className="buttons-nav" outline theme="secondary"
                     onClick={() => {
                         rx.addNewSub ? rx.pageCounter(rx.pageCount - 1) : rx.pageCounter(rx.pageCount - 2)
@@ -138,19 +170,26 @@ const Information = ({ isChecked, ...rx }) => {
                     }
                     }>
                     <Icon type="left" /> Back
-            </Button>
+                </Button>
 
                 <Button className="buttons-nav" theme="secondary"
-                    disabled={
-                        !values.title || !values.author || !values.publisher ||
-                        !values.description && (descriptionNeeded || isChecked)
-                    }
-                    onClick={() => rx.pageCounter(0)}>Add
-            </Button>
-
+                    disabled={required && requiredDescription}
+                    onClick={() => {
+                        sending()
+                        setTimeout(() => {
+                            // rx.pageCounter(0)
+                            handleSubmit(values)
+                        }, 3000)
+                        setLoader(true)
+                    }}>Add
+                {loader && <Icon type="loading" style={{ fontSize: 18 }} spin />}
+                </Button>
             </div>
         </>
     )
 }
 
 export default Information
+
+
+

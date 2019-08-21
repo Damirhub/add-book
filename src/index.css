@@ -72,14 +72,10 @@ body {
 }
 
 .form-control:hover {
-  /* color: #495057; */
   background-color: #fff !important;
-  /* border-color: #ffbb00 !important; */
-  /* box-shadow: 0 0.313rem 0.719rem rgba(0, 123, 255, .1), 0 0.156rem 0.125rem rgba(0, 0, 0, .06); */
 }
 
 .form-control:active {
-  /* color: #495057; */
   background-color: #fff !important;
 }
 
@@ -164,9 +160,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   font-size: .95rem !important;
 }
 
-/* VALIDATION ICON REMOVED TO FIT */
+/* VALIDATION ICON REMOVED*/
 
-.number-input.form-control.is-invalid, .was-validated .form-control:invalid {
+.form-control.is-invalid, .was-validated .form-control:invalid {
   padding-right: 0 !important;
   background-image: none !important;
 }
@@ -202,8 +198,16 @@ i.anticon.anticon-check.check-icon {
   font-size: 16px;
 }
 
+.anticon-spin {
+  color: #e8ebf4 ;
+  margin-top: -16px;
+  margin-left: 10px;
+  position:absolute;
+}
+
 .add-another {
   width: 300px;
   height: 40px;
   margin-bottom: 30px;
 }
+
