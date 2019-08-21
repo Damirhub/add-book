@@ -177,7 +177,7 @@ const Information = ({ isChecked, ...rx }) => {
                     onClick={() => {
                         sending()
                         setTimeout(() => {
-                            // rx.pageCounter(0)
+                            rx.pageCounter(0)
                             handleSubmit(values)
                         }, 3000)
                         setLoader(true)
