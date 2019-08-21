@@ -26,17 +26,16 @@ const Information = ({ isChecked, ...rx }) => {
         language: '',
         description: ''
     })
+       // console.table(values)
 
     const [loader, setLoader] = useState(false)
-
     const [touched, setTouched] = useState({ title: false, number: false })
 
     const descriptionNeeded = rx.selectedSubgenre.isDescriptionRequired
+    const required = !values.title || !values.author || !values.publisher || !values.number || !values.description
+    const requiredDescription = descriptionNeeded || isChecked
 
     const change = (e) => handleChange(e)
-
-
-    // console.table(values)
 
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -69,11 +68,6 @@ const Information = ({ isChecked, ...rx }) => {
             i++;
         }, 500);
     };
-    const required = !values.title || !values.author || !values.publisher || !values.number || !values.description
-
-    const requiredDescription = descriptionNeeded || isChecked
-
-    
 
     return (
         <>
