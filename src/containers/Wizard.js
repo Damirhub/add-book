@@ -1,8 +1,8 @@
 import React from 'react'
-import Steps from '../Steps'
+import Steps from './Steps'
 import { connect } from "react-redux"
 import './Wizard.css'
-import Wrapper from './Wrapper'
+import Wrapper from './UI/Wrapper'
 
 
 const Wizard = ({ pageCount, wizardStep, addNewSub }) => {
